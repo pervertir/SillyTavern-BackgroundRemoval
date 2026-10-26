@@ -1,0 +1,14 @@
+{
+  "name": "yodayo-bgremove",
+  "version": "1.0.0",
+  "description": "SillyTavern server plugin: removes backgrounds from character images on this machine for the Yodayo Tavern Theme.",
+  "main": "index.mjs",
+  "type": "module",
+  "license": "MIT",
+  "author": "pervertir",
+  "private": true,
+  "dependencies": {
+    "onnxruntime-node": "1.30.0",
+    "sharp": "0.35.5"
+  }
+}
