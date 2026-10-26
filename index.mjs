@@ -1,4 +1,4 @@
-// Yodayo Tavern Theme: background removal server plugin for SillyTavern.
+// Background removal server plugin for SillyTavern.
 //
 // Runs ToonOut (BiRefNet fine-tuned on anime, MIT) with native onnxruntime on this
 // machine, using the fastest backend it has: CUDA (NVIDIA on Linux), DirectML (any GPU on
@@ -7,7 +7,7 @@
 // this model into 200+ partitions and needs over 30 GB. The model is downloaded on first
 // use into this plugin's models folder, and released after a while unused.
 //
-// Routes (under /api/plugins/yodayo-bgremove):
+// Routes (under /api/plugins/background-removal):
 //   GET  /status   what's loaded, the backend in use and download progress
 //   POST /remove   { image: base64 } → { image: base64 PNG with a transparent background }
 
@@ -32,8 +32,8 @@ const PREFERENCE = ['cuda', 'dml', 'webgpu', 'cpu'];
 const IDLE_RELEASE_MS = 10 * 60 * 1000;
 
 export const info = {
-    id: 'yodayo-bgremove',
-    name: 'Yodayo Tavern background removal',
+    id: 'background-removal',
+    name: 'Background Removal',
     description: 'Removes backgrounds from character images on this machine (ToonOut / BiRefNet).',
 };
 
@@ -55,7 +55,7 @@ const failed = new Set();
 let queue = Promise.resolve();
 
 function log(...args) {
-    console.log('[yodayo-bgremove]', ...args);
+    console.log('[background-removal]', ...args);
 }
 
 async function loadLibraries() {
@@ -87,13 +87,13 @@ async function downloadModel(target) {
 
 async function createSession() {
     await loadLibraries();
-    const modelPath = process.env.YODAYO_BGREMOVE_MODEL || path.join(MODELS_DIR, MODEL.file);
+    const modelPath = process.env.BGREMOVE_MODEL || path.join(MODELS_DIR, MODEL.file);
     if (!fs.existsSync(modelPath)) {
         await downloadModel(modelPath);
     }
     state.status = 'loading';
     const available = new Set(ort.listSupportedBackends().map(backend => backend.name));
-    const forced = process.env.YODAYO_BGREMOVE_BACKEND;
+    const forced = process.env.BGREMOVE_BACKEND;
     const candidates = forced
         ? [forced]
         : PREFERENCE.filter(name => available.has(name) && (name === 'cpu' || !failed.has(name)));
@@ -149,7 +149,7 @@ async function runModel(tensor) {
             const output = await session.run({ [session.inputNames[0]]: tensor });
             return output[session.outputNames[0]].data;
         } catch (error) {
-            if (state.backend === 'cpu' || process.env.YODAYO_BGREMOVE_BACKEND) {
+            if (state.backend === 'cpu' || process.env.BGREMOVE_BACKEND) {
                 throw error;
             }
             log(`${state.backend} failed to run, trying the next backend: ${error?.message ?? error}`);
