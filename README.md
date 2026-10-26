@@ -4,6 +4,8 @@ A SillyTavern server plugin that cuts images out of their background on your own
 It runs [ToonOut](https://huggingface.co/joelseytre/toonout), a BiRefNet fine-tuned for
 anime that keeps BiRefNet's accuracy on real people, through native ONNX Runtime.
 
+![Background Removal for SillyTavern](.github/social-preview.png)
+
 It's what the [Yodayo Tavern Theme](https://github.com/pervertir/SillyTavern-YodayoTavernTheme)
 uses for its **Remove background** button, and any extension can call it.
 
