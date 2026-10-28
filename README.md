@@ -6,10 +6,17 @@ anime that keeps BiRefNet's accuracy on real people, through native ONNX Runtime
 
 ![Background Removal for SillyTavern](.github/social-preview.png)
 
-It's what the [Yodayo Tavern Theme](https://github.com/pervertir/SillyTavern-YodayoTavernTheme)
-uses for its **Remove background** button, and any extension can call it.
+The repo is two things at once: a **server plugin** that does the cutting on your machine,
+and a small **UI extension** that gives you a button and a slash command for it. You don't need
+any particular theme. The [Yodayo Tavern Theme](https://github.com/pervertir/SillyTavern-YodayoTavernTheme)
+uses the same server plugin for its own Remove background button, and any extension can call
+its API.
 
 ## Install
+
+Install it twice from the same link, once as each half:
+
+**1. Server plugin** (does the work)
 
 1. Turn on server plugins: set `enableServerPlugins: true` in SillyTavern's `config.yaml`.
 2. In SillyTavern's `plugins` folder:
@@ -23,6 +30,22 @@ uses for its **Remove background** button, and any extension can call it.
 The first image downloads the model (974 MB) into the plugin's `models` folder. With
 `enableServerPluginsAutoUpdate` on, SillyTavern keeps the plugin up to date; run
 `npm install` again after an update that changes its dependencies.
+
+**2. UI extension** (the button and the command)
+
+In SillyTavern open **Extensions → Install extension** and paste
+`https://github.com/pervertir/SillyTavern-BackgroundRemoval`. If the server plugin is
+missing, the extension shows these steps the first time you use it.
+
+## Use
+
+- **A character's picture:** open the character, then **More… → Remove background**. The
+  cutout is saved to the character's gallery and shown on a checkerboard with a Download
+  button.
+- **Slash command:** `/bgremove` cuts out the open character's picture, `/bgremove <image URL>`
+  any image. It returns the saved cutout's path, so it chains in STscript and Quick Replies,
+  for example `/bgremove | /echo {{pipe}}`. Add `show=true` to see the result. Alias:
+  `/removebg`.
 
 ## Hardware
 

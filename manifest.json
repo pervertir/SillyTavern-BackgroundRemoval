@@ -1,0 +1,13 @@
+{
+    "display_name": "Background Removal",
+    "description": "Cut character images out of their backgrounds on your machine. Needs this repo's server plugin.",
+    "loading_order": 20,
+    "minimum_client_version": "1.19.0",
+    "js": "ui/index.js",
+    "css": "ui/style.css",
+    "author": "pervertir",
+    "version": "1.0.0",
+    "license": "MIT",
+    "homepage": "https://github.com/pervertir/SillyTavern-BackgroundRemoval",
+    "auto_update": true
+}

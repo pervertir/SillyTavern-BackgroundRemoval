@@ -1,0 +1,32 @@
+/* Background Removal: the cutout preview */
+.bgremove-preview {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #2a2c2f;
+    background-image:
+        linear-gradient(45deg, #3a3c40 25%, transparent 25%),
+        linear-gradient(-45deg, #3a3c40 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #3a3c40 75%),
+        linear-gradient(-45deg, transparent 75%, #3a3c40 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+.bgremove-preview img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+}
+
+.bgremove-actions {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.bgremove-actions a {
+    text-decoration: none;
+}
