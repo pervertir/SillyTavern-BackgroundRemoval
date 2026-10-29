@@ -47,6 +47,8 @@ missing, the extension shows these steps the first time you use it.
   for example `/bgremove | /echo {{pipe}}`. Add `show=true` to see the result. Alias:
   `/removebg`.
 
+![The result for SillyTavern's sample character Flux the Cat](.github/result.jpg)
+
 ## Hardware
 
 The plugin picks the fastest backend this machine has, and falls back to the next one if
